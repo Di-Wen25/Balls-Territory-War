@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>MarblePi - 球球派：彈珠競速與領土戰爭</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <div class="app-container">
+    <aside class="sidebar">
+      <div class="brand">
+        <h1>MarblePi 彈珠戰爭</h1>
+        <span class="badge">Web 模擬器</span>
+      </div>
+
+      <div class="panel-section">
+        <h3>玩家配置</h3>
+        <div id="players-config-list"></div>
+      </div>
+
+      <div class="panel-section">
+        <h3>模擬參數設定</h3>
+        <div class="control-group">
+          <label>模式選擇</label>
+          <select id="mode-select">
+            <option value="2p">2 人標準對決</option>
+            <option value="4p">4 人混戰模式</option>
+          </select>
+        </div>
+        <div class="control-group">
+          <label>碰撞分裂機制</label>
+          <input type="checkbox" id="split-mode-toggle">
+        </div>
+        <div class="control-group">
+          <label>模擬演進速度</label>
+          <input type="range" id="speed-slider" min="1" max="5" value="1">
+          <span id="speed-val">1x</span>
+        </div>
+        <div class="control-group">
+          <label>彈珠最大上限</label>
+          <input type="number" id="max-marbles-input" value="100" min="20" max="500">
+        </div>
+      </div>
+
+      <div class="action-buttons">
+        <button id="start-btn" class="btn primary">啟動模擬對局</button>
+        <button id="export-video-btn" class="btn secondary" disabled>下載完整對局影片</button>
+      </div>
+    </aside>
+
+    <main class="viewport">
+      <div class="game-header">
+        <div class="stat-bar" id="live-stats"></div>
+      </div>
+      <div class="canvas-wrapper">
+        <canvas id="game-canvas" width="1000" height="800"></canvas>
+      </div>
+    </main>
+  </div>
+
+  <div id="result-modal" class="modal hidden">
+    <div class="modal-content">
+      <h2>模擬對局結束</h2>
+      <div class="winner-banner">
+        <img id="winner-avatar" src="" alt="Winner Avatar">
+        <h3 id="winner-name">獲勝者：-</h3>
+      </div>
+      <div class="stats-grid">
+        <div class="stat-card">
+          <span class="label">領土佔領率</span>
+          <span id="stat-territory" class="value">0%</span>
+        </div>
+        <div class="stat-card">
+          <span class="label">體積峰值</span>
+          <span id="stat-peak-size" class="value">0</span>
+        </div>
+        <div class="stat-card">
+          <span class="label">吞噬敵方數</span>
+          <span id="stat-kills" class="value">0</span>
+        </div>
+        <div class="stat-card">
+          <span class="label">對局耗時</span>
+          <span id="stat-duration" class="value">0s</span>
+        </div>
+      </div>
+      <div class="modal-actions">
+        <button id="modal-download-btn" class="btn primary">下載對局 MP4/WebM 影片</button>
+        <button id="modal-close-btn" class="btn secondary">重置對局</button>
+      </div>
+    </div>
+  </div>
+
+  <script src="app.js"></script>
+</body>
+</html>
